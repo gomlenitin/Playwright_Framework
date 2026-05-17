@@ -10,6 +10,6 @@ test('should have a title of app.vwo.com', async ({page}) => {
 test('should have a title of app.vwo.com duplicate', async function({page}) {
 
     await page.goto('https://app.vwo.com/');
-    expect(page).toHaveTitle('VWO - Application');
+    await expect(page).toHaveTitle('VWO - Application');
 
 });
