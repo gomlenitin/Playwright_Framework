@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("two users interact", async ({ browser }) => {
+    
     let adminContext = await browser.newContext();
     let adminPage = await adminContext.newPage();
 
