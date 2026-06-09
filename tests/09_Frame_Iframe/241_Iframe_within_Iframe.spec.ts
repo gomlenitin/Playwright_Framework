@@ -1,5 +1,5 @@
 
-import { test, expect, FrameLocator, Locator } from '@playwright/test'
+import { test, expect, FrameLocator, Locator } from '@playwright/test';
 
 test('Iframe within Iframe test', async ({ page }) => {
 

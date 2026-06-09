@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"powerquery.client.additionalSymbolsDirectories": [
+			"e:/Playwright_Framework/.vscode/excel-pq-symbols"
+		]
+	}
+}
