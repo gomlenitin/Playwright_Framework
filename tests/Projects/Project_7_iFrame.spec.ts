@@ -23,11 +23,11 @@ test("Handle multiple frame",async({page})=>{
     await expect(mainFrame.locator('//h2[@id="main-heading"]')).toBeVisible();
     await sideFrame.getByTestId('side-link-registration').click();
     await expect(mainFrame.locator('//h1')).toContainText('Vehicle registration');
-    await mainFrame.getByPlaceholder('e.g. Test Automation').fill("Grandi10");
-    await mainFrame.locator('//input[@id="RESULT_TextField-2"]').fill("Menka Patel");
-    await mainFrame.locator('//input[@id="RESULT_TextField-3"]').fill("MH-12-AC-1234");
+    await mainFrame.getByPlaceholder('e.g. Test Automation').fill("Nexon Pure Plus (PS) ");
+    await mainFrame.locator('//input[@id="RESULT_TextField-2"]').fill("Nitin Gomle");
+    await mainFrame.locator('//input[@id="RESULT_TextField-3"]').fill("MH-48-AC-0008");
     await mainFrame.locator('//select[@id="RESULT_RadioButton-1"]').click();
-    await mainFrame.locator('//select[@id="RESULT_RadioButton-1"]').selectOption('Hatchback');
+    await mainFrame.locator('//select[@id="RESULT_RadioButton-1"]').selectOption('SUV');
     await mainFrame.locator('//input[@id="RESULT_TextField-4"]').fill('2026');
     await mainFrame.locator('//textarea[@id="RESULT_TextArea-1"]').fill('This is practice of iframe');
     await mainFrame.getByTestId('vehicle-submit').click();
@@ -35,10 +35,10 @@ test("Handle multiple frame",async({page})=>{
     console.log(output);
     const jsonOutput = JSON.parse(output);
     expect(jsonOutput).toMatchObject({
-        "vehicleName": "Grandi10",
-        "ownerName": "Menka Patel",
-        "regNumber": "MH-12-AC-1234",
-        "vehicleType": "Hatchback",
+        "vehicleName": "Nexon Pure Plus (PS) ",
+        "ownerName": "Nitin Gomle",
+        "regNumber": "MH-48-AC-0008",
+        "vehicleType": "SUV",
         "year": "2026",
         "notes": "This is practice of iframe"
     })
