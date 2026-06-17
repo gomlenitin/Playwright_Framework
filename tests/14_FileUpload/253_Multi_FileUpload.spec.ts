@@ -21,9 +21,8 @@ test.describe('FileUpload handling', () => {
                 name: 'file2.jpg',
                 mimeType: 'image/jpeg',
                 buffer: Buffer.from('this is test')
-            }
-
-            ]);
+            }]
+            );
 
         await page.locator(".pf-v6-c-button pf-m-secondary").click();
         await page.waitForTimeout(15000);

@@ -7,7 +7,7 @@ test.describe('File Upload Demo - TestingAcademy', () => {
         await page.goto('https://app.thetestingacademy.com/playwright/widgets/upload-download');
     });
 
-    test('demo: upload file using setInputFiles', async ({ page }) => {
+    test('demo: download file using promise all', async ({ page }) => {
 
 
         // const [download] = await Promise.all([
