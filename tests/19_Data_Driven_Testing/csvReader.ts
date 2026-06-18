@@ -7,11 +7,12 @@ export interface TestDataRow {
 
 export function readCSV(filePath: string): TestDataRow[] {
 
-    let fullPath = path.resolve(filePath);
-    let content = fs.readFileSync(fullPath, 'utf-8');
-    let lines = content.trim().split('\n');
 
-    // First Line is headers
+    const fullPath = path.join(__dirname, filePath);
+    const content = fs.readFileSync(fullPath, 'utf-8');
+    const lines = content.trim().split('\n');
+
+      // First Line is headers
     let headers = lines[0].split(",");
 
     // Remaining Lines are data
@@ -26,8 +27,5 @@ export function readCSV(filePath: string): TestDataRow[] {
 
     }
     return data;
-
-
-
 
 }

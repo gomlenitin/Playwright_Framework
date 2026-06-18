@@ -1,10 +1,9 @@
 import { test, expect } from '@playwright/test';
-import path from 'path';
+//import path from 'path';
+import * as path from 'path';
 import { readCSV } from './csvReader';
 
-test.describe('DDT CSV', () => {
-
-
+test.describe('DDT CSV with Test Hooks', () => {
 
     test.beforeEach(async ({ page }) => {
         await page.goto('https://app.thetestingacademy.com/playwright/multiple_element_filter');
@@ -14,7 +13,9 @@ test.describe('DDT CSV', () => {
         console.log(`afterEach: ${testInfo.title} — status: ${testInfo.status}`);
     });
 
-    const loginData = readCSV(path.join(__dirname, "login-data.csv"));
+    const loginData = readCSV("login-data.csv");
+    //const loginData = readCSV(path.join(__dirname, "login-data.csv"));
+
 
     for (const data of loginData) {
 
