@@ -5,14 +5,15 @@ import loginData from "./registration-data.json";
 test.describe('DDT CSV', () => {
 
 
-
     test.beforeEach(async ({ page }) => {
         await page.goto('https://app.thetestingacademy.com/playwright/multiple_element_filter');
     });
 
+
     test.afterEach(async ({ }, testInfo) => {
         console.log(`afterEach: ${testInfo.title} — status: ${testInfo.status}`);
     });
+
 
     for (const data of loginData) {
 
@@ -30,7 +31,7 @@ test.describe('DDT CSV', () => {
             await textboxPassword.fill(data.password);
             await buttonLogin.click();
 
-            if (data.shouldPass === "true") {
+            if (data.shouldPass === true) {
                 await expect(page).not.toHaveURL(/multiple_element_filter/);
             } else {
                 await expect(page.getByText(data.expectedError)).toBeVisible();

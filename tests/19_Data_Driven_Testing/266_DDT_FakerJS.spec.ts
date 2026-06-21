@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
 test.describe('FakerJS data-driven template', () => {
+    
     test('should display the expected generated user details', async ({ page }) => {
         await page.goto('https://app.thetestingacademy.com/playwright/ttacart/');
 
