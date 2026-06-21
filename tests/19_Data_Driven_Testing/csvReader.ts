@@ -18,8 +18,10 @@ export function readCSV(filePath: string): TestDataRow[] {
     // Remaining Lines are data
     let data: TestDataRow[] = [];
     for (let i = 1; i < lines.length; i++) {
+
         let values = lines[i].split(',');
         let row: TestDataRow = {};
+        
         for (let j = 0; j < headers.length; j++) {
             row[headers[j].trim()] = values[j]?.trim() || "";
         }
