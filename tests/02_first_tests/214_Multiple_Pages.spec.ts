@@ -1,21 +1,17 @@
-import { chromium } from "playwright";
+import { chromium, test } from '@playwright/test';
 
-async function multiTabTest() {
+test('open multiple pages in the same context', async () => {
+    const browser = await chromium.launch({ headless: false });
+    const context = await browser.newContext();
 
-    let browser = await chromium.launch({ headless: false });
-    let context = await browser.newContext();
+    const page1 = await context.newPage();
+    await page1.goto('https://app.vwo.com/#login');
+    console.log('Tab 1: Dashboard');
 
-    // Tab 1
-    let page1 = await context.newPage();
-    await page1.goto("https://app.vwo.com/#login");
-    console.log("Tab 1: Dashboard");
+    const page2 = await context.newPage();
+    await page2.goto('https://app.vwo.com/#dashboard');
+    console.log('Tab 2: Settings');
 
-    // Tab 2 — same context, shares cookies with Tab 1
-    let page2 = await context.newPage();
-    await page2.goto("https://app.vwo.com/#dashboard");
-    console.log("Tab 2: Settings");
-
-
-}
-
-multiTabTest();
+    await context.close();
+    await browser.close();
+});
