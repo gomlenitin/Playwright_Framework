@@ -8,16 +8,16 @@ export class Loginpage {
 
     constructor(page : Page) {
         this.page = page;
-        this.usernameInput = page.getByRole ('textbox', {name : "user-name"});
+        this.usernameInput = page.getByRole ('textbox', {name : "username"});
         this.passwordInput = page.getByRole ('textbox', {name : "password"});
         this.LoginButton = page.getByRole ('button' , {name : "Login"});
     }
 
-    async goTo() {
+    async goto() {
         await this.page.goto('https://app.thetestingacademy.com/playwright/ttacart/');
     }
 
-    async Login(username : string, password :string) {
+    async login(username : string, password :string) {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);
         await this.LoginButton.click();

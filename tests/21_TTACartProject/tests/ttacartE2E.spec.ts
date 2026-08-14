@@ -5,7 +5,12 @@ import { TtacartcheckoutpageTs } from '../pages/TTACartCheckoutPage';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+const envPath = path.resolve(__dirname, '../.env');
+const legacyEnvPath = path.resolve(__dirname, '../env');
+
+// Prefer the conventional .env file while retaining support for the existing
+// project credential file, which is named "env".
+dotenv.config({ path: require('fs').existsSync(envPath) ? envPath : legacyEnvPath });
 
 function getRequiredEnv(name: string): string {
     const value = process.env[name];

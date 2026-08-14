@@ -17,9 +17,10 @@ export class Loginpage {
         await this.page.goto("https://app.thetestingacademy.com/playwright/ttacart/");
     }
 
-    async login(username: string, password: string) {
+    async login(username : string, password :string) {
         await this.textboxUsername.fill(username);
         await this.textboxPassword.fill(password);
         await this.buttonLogin.click();
+
     }
 }
