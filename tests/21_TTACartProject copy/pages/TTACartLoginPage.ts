@@ -1,0 +1,26 @@
+import { type Locator, type Page } from '@playwright/test';
+
+export class Loginpage {
+    readonly page : Page;
+    readonly usernameInput : Locator;
+    readonly passwordInput : Locator;
+    readonly LoginButton : Locator;
+
+    constructor(page : Page) {
+        this.page = page;
+        this.usernameInput = page.getByRole ('textbox', {name : "user-name"});
+        this.passwordInput = page.getByRole ('textbox', {name : "password"});
+        this.LoginButton = page.getByRole ('button' , {name : "Login"});
+    }
+
+    async goTo() {
+        await this.page.goto('https://app.thetestingacademy.com/playwright/ttacart/');
+    }
+
+    async Login(username : string, password :string) {
+        await this.usernameInput.fill(username);
+        await this.passwordInput.fill(password);
+        await this.LoginButton.click();
+
+    }
+}

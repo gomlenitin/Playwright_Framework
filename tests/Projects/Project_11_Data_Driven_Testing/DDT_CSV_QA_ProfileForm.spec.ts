@@ -3,7 +3,7 @@ import { readCSV } from './utils/csvReader';
 
 test.describe('Data Driven Testing - Filling QA form using CSV data', () => {
 
-    const csvFilePath = 'tests/Projects/Project_10_Data_Driven_Testing/Data/register.csv'; 
+    const csvFilePath = 'tests/Projects/Project_11_Data_Driven_Testing/Data/register.csv'; 
     const formURL = 'https://app.thetestingacademy.com/playwright/tables/practice#page'; 
 
     const profileData= readCSV(csvFilePath);
