@@ -1,156 +1,124 @@
 # Playwright Framework
 
-A comprehensive test automation framework built with Playwright for end-to-end testing of web applications.
+A TypeScript learning and automation project built with [Playwright](https://playwright.dev/). It contains practical examples of common browser-automation techniques, plus end-to-end, page-object-model, and data-driven test projects.
 
-## Overview
+## What's included
 
-This project provides a robust testing framework using Playwright, a modern automation library that supports all major browsers (Chromium, Firefox, WebKit) and provides powerful APIs for test automation, including features like:
-- Cross-browser testing
-- Screenshots and video recording
-- Network request/response mocking
-- Accessibility testing
-- Performance testing with Allure reporting
+- Cross-browser execution in Chromium and Firefox
+- Playwright Test fixtures, assertions, hooks, browser contexts, and session storage
+- Locators, frames, shadow DOM, dialogs, file uploads/downloads, web tables, and drag-and-drop
+- Data-driven tests using CSV, JSON, XLSX, and Faker
+- Page Object Model examples, including the TTA Cart project
+- HTML reports and a custom TTA reporter
+- GitHub Actions workflow for automated test execution
 
-## Requirements
+## Prerequisites
 
-- Node.js (LTS recommended - v16 or higher)
-- npm or yarn
+- Node.js LTS
+- npm
 - Git
 
-## Installation
+## Get started
 
-1. Clone the repository:
 ```bash
 git clone https://github.com/gomlenitin/Playwright_Framework.git
 cd Playwright_Framework
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Install Playwright browsers:
-```bash
+npm ci
 npx playwright install
 ```
 
-## Project Structure
+Use `npm install` instead of `npm ci` if you are intentionally changing dependencies.
 
+## Run tests
+
+```bash
+# Run the complete suite
+npm test
+
+# Run with a visible browser
+npm run test:headed
+
+# Open Playwright's interactive UI mode
+npm run test:ui
+
+# Run a configured browser project
+npm run test:chromium
+npm run test:firefox
+
+# Run the Page Object Model examples
+npm run test:po
+
+# Run end-to-end examples
+npm run test:e2e
+
+# Debug a test
+npm run test:debug
 ```
-Playwright_Framework/
-├── e2e/                              # End-to-end test examples
-├── tests/                            # Main test suite directory
-│   ├── 01_Alerts/                    # Alert handling tests
-│   ├── 02_Browser_Context/           # Browser context tests
-│   ├── 03_Locators/                  # Locator strategy tests
-│   ├── 04_Assertions/                # Assertion tests
-│   ├── 05_Dialog_Box/                # Dialog handling tests
-│   ├── 06_Radio_CheckBox/            # Radio button and checkbox tests
-│   ├── 07_DropDown/                  # Dropdown interaction tests
-│   ├── 08_WebTableUI/                # Web table handling tests
-│   ├── 09_Frame_Iframe/              # Frame and iframe tests
-│   ├── 10_Keyboard_Hover_Drag_Drop/  # Keyboard, hover, and drag-drop tests
-│   └── Projects/                     # Project-based test scenarios
-├── utils/                            # Utility functions and helpers
-├── playwright.config.ts              # Playwright configuration
-├── playwright-report/                # HTML test reports
-├── allure-results/                   # Allure report results
-├── tta-report/                       # TTA (Test Tracking Analysis) reports
-├── package.json                      # Project dependencies
-├── tsconfig.json                     # TypeScript configuration
-├── README.md                         # Project documentation
-└── .vscode/                          # VS Code settings
+
+To run one file directly:
+
+```bash
+npx playwright test tests/11_JS_Alerts/243_JS_Alerts.spec.ts
+```
+
+## Reports
+
+After a run, open the Playwright HTML report with:
+
+```bash
+npm run test:report
+```
+
+The configuration uses the HTML reporter and `utils/CustomTTAReporter.ts`. Test artifacts are collected for every test: trace, video, and screenshot.
+
+Allure packages and example tests are included. To generate Allure results, uncomment the `allure-playwright` reporter entry in `playwright.config.ts`, run the tests, then generate the report with your preferred Allure command.
+
+## Project layout
+
+```text
+.
+├── e2e/                         # Basic end-to-end examples
+├── tests/                       # Topic-based examples and project suites
+│   ├── 01_Basics/
+│   ├── 03_Locators_Commands/
+│   ├── 05_Allure_Reporting/
+│   ├── 17_Expect_Assertions/
+│   ├── 19_Data_Driven_Testing/
+│   ├── 20_Page_Object_Model/
+│   ├── 21_TTACartProject/       # TTA Cart page objects and E2E tests
+│   └── Projects/                 # Larger practice projects
+├── utils/                        # Custom reporters and shared utilities
+├── .github/workflows/            # GitHub Actions CI workflow
+├── playwright.config.ts          # Playwright configuration
+└── package.json                  # Scripts and dependencies
 ```
 
 ## Configuration
 
-The framework is configured in `playwright.config.ts` with the following defaults:
-- Browser: Chromium
-- Headless: true
-- Screenshots: on failure
-- Video: retain-on-failure
-- Timeout: 30 seconds per test
+`playwright.config.ts` currently defines Chromium and Firefox projects. Tests run headed by default, with trace, video, and screenshots enabled. In CI, Playwright retries failed tests twice and runs with one worker.
 
-## Usage
+The configuration loads a local `.env` file, so it is ready to support environment-specific settings. When wiring a test or `use.baseURL` to the supplied helper, the available variables are `BASE_URL`, `TTA_ENV`, `QA_BASE_URL`, `DEV_BASE_URL`, `STG_BASE_URL`, `PROD_BASE_URL`, and `API_BASE_URL`.
 
-### Run all tests:
+## Continuous integration
+
+GitHub Actions runs the Playwright suite on pushes and pull requests to `main` and `master`. It installs dependencies and Playwright browsers, then publishes the HTML report as a workflow artifact.
+
+## Useful commands
+
 ```bash
-npm test
+npm run typecheck   # Type-check without generating files
+npm run build       # Compile TypeScript
+npm run clean       # Remove generated local test artifacts
 ```
-
-### Run specific test file:
-```bash
-npx playwright test tests/01_Alerts/AlertTest.spec.ts
-```
-
-### Run tests in headed mode (browser visible):
-```bash
-npx playwright test --headed
-```
-
-### Run tests with debugging:
-```bash
-npx playwright test --debug
-```
-
-### Generate test report:
-```bash
-npx playwright show-report
-```
-
-### Run tests with specific browser:
-```bash
-npx playwright test --project=chromium
-npx playwright test --project=firefox
-npx playwright test --project=webkit
-```
-
-## Test Categories
-
-- **Alerts** - JavaScript alert, confirm, and prompt dialogs
-- **Browser Context** - Multi-page and context management
-- **Locators** - Various locator strategies (CSS, XPath, text, etc.)
-- **Assertions** - UI element assertions and validations
-- **Dialogs** - Dialog box handling and interactions
-- **Radio & Checkboxes** - Form element interactions
-- **Dropdowns** - Select element and custom dropdown tests
-- **Web Tables** - Dynamic table handling and data extraction
-- **Frames & Iframes** - Nested frame navigation
-- **Keyboard & Hover** - Keyboard input, hover actions, drag-drop operations
-- **Projects** - End-to-end project test scenarios
-
-## Reporting
-
-The framework generates multiple types of reports:
-- **Playwright HTML Report**: View with `npx playwright show-report`
-- **Allure Reports**: Located in `allure-results/` directory
-- **TTA Reports**: Located in `tta-report/` directory
-
-## Technologies Used
-
-- **Playwright** - Cross-browser automation framework
-- **TypeScript** - Type-safe JavaScript superset
-- **Node.js** - JavaScript runtime environment
-- **npm** - Package manager
 
 ## Contributing
 
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -am 'Add your feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
-5. Submit a pull request
+1. Fork the repository.
+2. Create a branch for your change.
+3. Add or update tests and documentation as needed.
+4. Run the relevant test command and `npm run typecheck`.
+5. Open a pull request.
 
 ## License
 
 ISC
-
-## Support
-
-For issues or questions, please open an issue on the [GitHub repository](https://github.com/gomlenitin/Playwright_Framework/issues).
-
----
-
-**Last Updated**: 2026-06-09
